@@ -38,13 +38,42 @@ class pointWiseModel(LTRmodel):
     def __init__(self, num_features, scoring_network_layers, dropout = 0.3):
         super().__init__(num_features, scoring_network_layers, dropout)
         self.name = "Pointwise LTR model"
-        self.loss_fn = torch.nn.MSELoss()
+        self.loss_fn = torch.nn.SmoothL1Loss()
 
 class pairWiseModel(LTRmodel):
-    def __init__(self, num_features, scoring_network_layers, dropout = 0.3):
+    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 1000):
         super().__init__(num_features, scoring_network_layers, dropout)
         self.name = "Pairwise LTR model"
-        self.loss_fn = torch.nn.SmoothL1Loss()
+        self.loss_fn = torch.nn.BCELoss()
+        self.sigma = sigma
+        self.random_pairs = random_pairs
+
+    def calc_p(self,s_i, s_j):
+        return 1/(1 + torch.exp(-self.sigma * (s_i - s_j)))
+
+    #override
+    def loss_function(self,target):
+        target = target.squeeze()
+        loss = torch.zeros(1)
+        
+
+        ## generate pairs and calculate P and S
+        for pair in range(self.random_pairs):
+            i, j = np.random.choice(self.scores.shape[0], 2)
+            s_i = self.scores[i]
+            s_j = self.scores[j]
+            if target[i] > target[j]:
+                S = 1
+            elif target[i] == target[j]:
+                S = 0
+            else:
+                S = -1
+            
+            S = torch.Tensor([S])
+            P = self.calc_p(s_i, s_j)
+            loss += self.loss_fn(P, S)
+
+        return loss
 
 class listWiseModel(LTRmodel):
     pass
