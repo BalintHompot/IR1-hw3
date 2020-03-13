@@ -21,11 +21,12 @@ def trainModel(model, data, epochs, optimizer):
         loss.backward()
         optimizer.step()
         if epoch%20 == 0:
-            print("validation loss at epoch " + str(epoch))
+            print("validation ndcg at epoch " + str(epoch))
             model.eval()
-            all_scores = model.score(data.validation)
-            loss = model.loss_function(labels_val)
-            print(loss.item())
+            validation_scores = model.score(data.validation)
+            results = evl.evaluate(data.validation, validation_scores, print_results=False)
+            print(results["ndcg"])
+
 
 
 
@@ -46,7 +47,7 @@ print('Number of documents in test set: %d' % data.test.num_docs())
 # initialize a random model
 trainModel(model, data, epochs, optimizer)
 
-validation_scores = model.score(data.validation)
+test_scores = model.score(data.test)
 print('------')
-print('Evaluation on entire validation partition.')
-results = evl.evaluate(data.validation, validation_scores, print_results=True)
+print('Evaluation on entire test partition.')
+results = evl.evaluate(data.test, test_scores, print_results=True)
