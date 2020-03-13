@@ -17,7 +17,7 @@ print('Number of queries in test set: %d' % data.test.num_queries())
 print('Number of documents in test set: %d' % data.test.num_docs())
 
 # initialize a random model
-random_model = randomModel(data.num_features)
+random_model = pointWiseModel(data.num_features, [10,10,10])
 
 all_scores = random_model.score(data.train)
 
