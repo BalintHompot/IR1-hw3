@@ -41,8 +41,10 @@ class pointWiseModel(LTRmodel):
         self.loss_fn = torch.nn.MSELoss()
 
 class pairWiseModel(LTRmodel):
-    pass
-    ##TODO
+    def __init__(self, num_features, scoring_network_layers, dropout = 0.3):
+        super().__init__(num_features, scoring_network_layers, dropout)
+        self.name = "Pairwise LTR model"
+        self.loss_fn = torch.nn.SmoothL1Loss()
 
 class listWiseModel(LTRmodel):
     pass

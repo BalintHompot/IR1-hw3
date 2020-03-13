@@ -11,6 +11,7 @@ def trainModel(model, data, epochs, optimizer):
     print("======================== " + model.name + "========================")
 
     labels = torch.Tensor(data.train.label_vector).to(DEVICE).unsqueeze(1)
+    labels_val = torch.Tensor(data.validation.label_vector).to(DEVICE).unsqueeze(1)
 
     for epoch in tqdm(range(epochs)):
         model.train()
@@ -19,6 +20,12 @@ def trainModel(model, data, epochs, optimizer):
         loss = model.loss_function(labels)
         loss.backward()
         optimizer.step()
+        if epoch%20 == 0:
+            print("validation loss at epoch " + str(epoch))
+            model.eval()
+            all_scores = model.score(data.validation)
+            loss = model.loss_function(labels_val)
+            print(loss.item())
 
 
 
