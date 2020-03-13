@@ -32,7 +32,7 @@ def trainModel(model, data, epochs, optimizer):
 
 data = dataset.get_dataset().get_data_folds()[0]
 data.read_data()
-epochs = 500
+epochs = 100
 model = pairWiseModel(data.num_features, [10,10,10])
 optimizer = torch.optim.Adam(model.parameters(), lr = 0.0001)
 
