@@ -9,16 +9,21 @@ DEVICE = "cpu"
 class LTRmodel(nn.Module):
     def __init__(self, num_features, scoring_network_layers, dropout = 0.3):
         super().__init__()
-        self.scoringModules = nn.ModuleList()
-        input_size = num_features
-        for layer_size in scoring_network_layers:
-            self.scoringModules.append(nn.Sequential(nn.Linear(input_size, layer_size), nn.Dropout(dropout), nn.ReLU()))
-            input_size = layer_size
-        ## final scoring layer, mapping to a single number
-        self.scoringModules.append(nn.Linear(layer_size, 1))
-        self.scoringModules.to(DEVICE)
+        self.num_features = num_features
+        self.dropout = dropout
+        self.scoringModules = self.constructScoringNetwork(scoring_network_layers)
         self.name = "Parent LTR model class"
         self.loss_fn = None
+
+    def constructScoringNetwork(self, scoring_network_layers):
+        input_size = self.num_features
+        scoringModules = nn.ModuleList()
+        for layer_size in scoring_network_layers:
+            scoringModules.append(nn.Sequential(nn.Linear(input_size, layer_size), nn.Dropout(self.dropout), nn.ReLU()))
+            input_size = layer_size
+        ## final scoring layer, mapping to a single number
+        scoringModules.append(nn.Linear(layer_size, 1))
+        return scoringModules.to(DEVICE)
 
     def score(self, docs):
         scores = torch.Tensor(docs.feature_matrix)
@@ -41,7 +46,7 @@ class pointWiseModel(LTRmodel):
         self.loss_fn = torch.nn.SmoothL1Loss()
 
 class pairWiseModel(LTRmodel):
-    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 1000):
+    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 500):
         super().__init__(num_features, scoring_network_layers, dropout)
         self.name = "Pairwise LTR model"
         self.loss_fn = torch.nn.BCELoss()
