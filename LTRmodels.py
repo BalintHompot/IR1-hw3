@@ -45,10 +45,10 @@ class pointWiseModel(LTRmodel):
         self.name = "Pointwise LTR model"
         self.loss_fn = torch.nn.SmoothL1Loss()
 
-class pairWiseModel(LTRmodel):
+class RankNetDefualt(LTRmodel):
     def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 500):
         super().__init__(num_features, scoring_network_layers, dropout)
-        self.name = "Pairwise LTR model"
+        self.name = "Ranknet-original"
         self.loss_fn = torch.nn.BCELoss()
         self.sigma = sigma
         self.random_pairs = random_pairs
@@ -79,6 +79,10 @@ class pairWiseModel(LTRmodel):
             loss += self.loss_fn(P, S)
 
         return loss
+
+class RankNetFast(LTRmodel):
+    pass
+    ##TODO
 
 class listWiseModel(LTRmodel):
     pass
