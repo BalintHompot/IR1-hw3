@@ -3,5 +3,7 @@
  "learning rate": 0.001,
  "epochs": 50,
  "number of layers": 1,
- "number of neurons per layer": 5
+ "number of neurons per layer": 5,
+ "sigma": 0.5,
+ "number of random pairs": 500
 }

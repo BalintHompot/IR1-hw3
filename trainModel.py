@@ -33,14 +33,14 @@ default_params = {
     "random_pairs" : 1000
 }
 
-################### defining parameter ranges for sweep
+################### parameter ranges for sweep
 param_ranges = {
-    "learning rates":[0.001,0.0001],
-    "epoch nums":[50,100],
-    "layer nums":[1,2],
-    "layer sizes":[5,10],
-    "sigmas":[0.5,1],
-    "random pairs":[500,1000]
+    "learning rates":[0.001],
+    "epoch nums":[50],
+    "layer nums":[1],
+    "layer sizes":[5],
+    "sigmas":[0.5],
+    "random pairs":[500]
 }
 ######################################################
 

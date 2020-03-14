@@ -37,7 +37,7 @@ def trainModel(model, data, epochs, optimizer):
 def testModel(model, data):
     test_scores = model.score(data.test)
     print('+++++++++++++++++++++++++++++++++++++++++++++')
-    print('Final performance of ' + model.name + ' on test partition.')
+    print('Final performance of ' + model.name + ' with optimal params on test partition.')
     results = evl.evaluate(data.test, test_scores, print_results=True)
     return results
 
@@ -45,15 +45,13 @@ def construct_and_train_model_with_config(modelClass, data, config):
     epochs = config["epochs"]
     hidden_layers = [config["number of neurons per layer"] for i in range(config["number of layers"])]
     num_features = config["num features"]
-    if model.name != "Pointwise LTR model":
-        sigma = config["sigms"]
-        random_pairs = config["number of random pairs"]
-    else:
-        sigma = 1
-        random_pairs = 500
     
-    model = modelClass(num_features, hidden_layers, sigma=sigma, random_pairs=random_pairs)
+    model = modelClass(num_features, hidden_layers, sigma=1, random_pairs=500)
+    if model.name != "Pointwise LTR model":
+        model.sigma = config["sigma"]
+        model.random_pairs = config["number of random pairs"]
     optimizer = torch.optim.Adam(model.parameters(), lr = config["learning rate"])
+    print("++++++++++++++++++++++++++ Training model " + model.name + " with best params +++++++++++++++++++++++++++++++")
 
     trained_model, train_results = trainModel(model, data, epochs, optimizer)
     return trained_model
