@@ -21,13 +21,33 @@ print('Number of documents in validation set: %d' % data.validation.num_docs())
 print('Number of queries in test set: %d' % data.test.num_queries())
 print('Number of documents in test set: %d' % data.test.num_docs())
 
-pointwise_model = pointWiseModel(data.num_features, [10,10,10])
-ranknet_default = RankNetDefualt(data.num_features, [10,10,10])
+################### default params
+
+default_params = {
+    "num_features" : data.num_features,
+    "epochs":100,
+    "layer_num" : 3,
+    "layer_size" : 10,
+    "lr" : 0.0001,
+    "sigma" : 1,
+    "random_pairs" : 1000
+}
+
+################### defining parameter ranges for sweep
+param_ranges = {
+    "learning rates":[0.001,0.0001],
+    "epoch nums":[50,100],
+    "layer nums":[1,2],
+    "layer sizes":[5,10],
+    "sigmas":[0.5,1],
+    "random pairs":[500,1000]
+}
+######################################################
 
 print("--------- Fitting models and testing on set-aside data ------------")
-for model in [pointwise_model, ranknet_default]:
+for model in [pointWiseModel, RankNetDefualt]:
     # searching for best params
-    best_params_for_model = paramSweep(model, data)
+    best_params_for_model = paramSweep(model, data, default_params, param_ranges)
     # training model with best params
     best_model = construct_and_train_model_with_config(model, data, best_params_for_model)
     # testing the best model

@@ -40,7 +40,7 @@ class LTRmodel(nn.Module):
 
 
 class pointWiseModel(LTRmodel):
-    def __init__(self, num_features, scoring_network_layers, dropout = 0.3):
+    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 500):
         super().__init__(num_features, scoring_network_layers, dropout)
         self.name = "Pointwise LTR model"
         self.loss_fn = torch.nn.SmoothL1Loss()
