@@ -79,6 +79,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
         optimizer = torch.optim.Adam(model.parameters(), lr=lr)
         current_model, current_ndcg = trainModel(model, data, default_config["epochs"], optimizer)
         if(current_ndcg[0] > best_ndcg):
+            best_ndcg = current_ndcg[0]
             best_config["learning rate"] = lr
     print("............................")
     print("finished sweeping for learning rate, best value: " + str(best_config["learning rate"]))
@@ -93,6 +94,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
         optimizer = torch.optim.Adam(model.parameters(), lr=default_config["lr"])
         current_model, current_ndcg = trainModel(model, data, epochs, optimizer)
         if(current_ndcg[0] > best_ndcg):
+            best_ndcg = current_ndcg[0]
             best_config["epochs"] = epochs
     print("............................")
     print("finished sweeping for epoch num, best value: " + str(best_config["epochs"]))
@@ -108,6 +110,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
         optimizer = torch.optim.Adam(model.parameters(), lr=default_config["lr"])
         current_model, current_ndcg = trainModel(model, data, default_config["epochs"], optimizer)
         if(current_ndcg[0] > best_ndcg):
+            best_ndcg = current_ndcg[0]
             best_config["number of layers"] = layer_num
     print("............................")
     print("finished sweeping for number of layers, best value: " + str(best_config["number of layers"]))
@@ -123,6 +126,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
         optimizer = torch.optim.Adam(model.parameters(), lr=default_config["lr"])
         current_model, current_ndcg = trainModel(model, data, default_config["epochs"], optimizer)
         if(current_ndcg[0] > best_ndcg):
+            best_ndcg = current_ndcg[0]
             best_config["number of neurons per layer"] = layer_neuron
     print("............................")
     print("finished sweeping for neurons per layer, best value: " + str(best_config["number of neurons per layer"]))
@@ -144,6 +148,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
             optimizer = torch.optim.Adam(model.parameters(), lr=default_config["lr"])            
             current_model, current_ndcg = trainModel(model, data, default_config["epochs"], optimizer)
             if(current_ndcg[0] > best_ndcg):
+                best_ndcg = current_ndcg[0]
                 best_config["sigma"] = sigma
         print("............................")
         print("finished sweeping for sigma, best value: " + str(best_config["sigma"]))
@@ -158,6 +163,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
             optimizer = torch.optim.Adam(model.parameters(), lr=default_config["lr"])            
             current_model, current_ndcg = trainModel(model, data, default_config["epochs"], optimizer)
             if(current_ndcg[0] > best_ndcg):
+                best_ndcg = current_ndcg[0]
                 best_config["number of random pairs"] = pair_batch_size
         print("............................")
         print("finished sweeping for drawn random pair number, best value: " + str(best_config["number of random pairs"]))
