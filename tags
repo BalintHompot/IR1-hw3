@@ -1,0 +1,147 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	//
+DEVICE	LTRmodels.py	/^DEVICE = "cpu"$/;"	v
+DEVICE	LTRmodels2.py	/^DEVICE = "cpu"$/;"	v
+DEVICE	trainModel.py	/^DEVICE = "cpu"$/;"	v
+DEVICE	train_functions.py	/^DEVICE = "cpu"$/;"	v
+DataFold	dataset.py	/^class DataFold(object):$/;"	c
+DataFoldSplit	dataset.py	/^class DataFoldSplit(object):$/;"	c
+DataSet	dataset.py	/^class DataSet(object):$/;"	c
+F	LTRmodels.py	/^import torch.nn.functional as F$/;"	I
+F	LTRmodels2.py	/^import torch.nn.functional as F$/;"	I
+FOLDDATA_WRITE_VERSION	dataset.py	/^FOLDDATA_WRITE_VERSION = 4$/;"	v
+LTRmodel	LTRmodels.py	/^class LTRmodel(nn.Module):$/;"	c
+LTRmodel	LTRmodels2.py	/^class LTRmodel(nn.Module):$/;"	c
+RankNetDefualt	LTRmodels.py	/^class RankNetDefualt(LTRmodel):$/;"	c
+RankNetDefualt	LTRmodels2.py	/^class RankNetDefualt(LTRmodel):$/;"	c
+RankNetFast	LTRmodels.py	/^class RankNetFast(RankNetDefualt):$/;"	c
+__init__	LTRmodels.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3):$/;"	m	class:LTRmodel
+__init__	LTRmodels.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pa/;"	m	class:RankNetDefualt
+__init__	LTRmodels.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pa/;"	m	class:RankNetFast
+__init__	LTRmodels.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pa/;"	m	class:pointWiseModel
+__init__	LTRmodels2.py	/^        def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, rando/;"	m	class:listWiseModel
+__init__	LTRmodels2.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3):$/;"	m	class:LTRmodel
+__init__	LTRmodels2.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pa/;"	m	class:RankNetDefualt
+__init__	LTRmodels2.py	/^    def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pa/;"	m	class:pointWiseModel
+__init__	dataset.py	/^    def __init__(self, datafold, name, doclist_ranges, feature_matrix, label_vector):$/;"	m	class:DataFoldSplit
+__init__	dataset.py	/^    def __init__(self, dataset, fold_num, data_path):$/;"	m	class:DataFold
+__init__	dataset.py	/^    def __init__(self,$/;"	m	class:DataSet
+_add_zero_to_vector	dataset.py	/^def _add_zero_to_vector(vector):$/;"	f
+_create_feature_mapping	dataset.py	/^    def _create_feature_mapping(self, feature_dict):$/;"	m	class:DataFold
+_normalize_feat	dataset.py	/^    def _normalize_feat(self, query_ranges, feature_matrix):$/;"	m	class:DataFold
+_read_file	dataset.py	/^    def _read_file(self, path, feat_map, purge):$/;"	m	class:DataFold
+add_to_results	evaluate.py	/^def add_to_results(results, cur_results):$/;"	f
+all_inverted_rankings	example.py	/^all_rankings, all_inverted_rankings = random_model.rank(all_scores, data.train)$/;"	v
+all_rankings	example.py	/^all_rankings, all_inverted_rankings = random_model.rank(all_scores, data.train)$/;"	v
+all_scores	example.py	/^all_scores = random_model.score(data.train)$/;"	v
+best_model	trainModel.py	/^    best_model = construct_and_train_model_with_config(model, data, best_params_for_model)$/;"	v
+best_model_results	trainModel.py	/^    best_model_results = testModel(best_model, data)$/;"	v
+best_params_for_model	trainModel.py	/^    best_params_for_model = paramSweep(model, data, default_params, param_ranges)$/;"	v
+calc_p	LTRmodels.py	/^    def calc_p(self,s_i, s_j):$/;"	m	class:RankNetDefualt
+calc_p	LTRmodels.py	/^    def calc_p(self,s_i, s_j):$/;"	m	class:RankNetFast
+calc_p	LTRmodels2.py	/^    def calc_p(self,s_i, s_j):$/;"	m	class:RankNetDefualt
+clean_data	dataset.py	/^    def clean_data(self):$/;"	m	class:DataFold
+constructScoringNetwork	LTRmodels.py	/^    def constructScoringNetwork(self, scoring_network_layers):$/;"	m	class:LTRmodel
+constructScoringNetwork	LTRmodels2.py	/^    def constructScoringNetwork(self, scoring_network_layers):$/;"	m	class:LTRmodel
+construct_and_train_model_with_config	train_functions.py	/^def construct_and_train_model_with_config(modelClass, data, config):$/;"	f
+data	dataset.py	/^    data = dataset.get_data_folds()[0]$/;"	v
+data	example.py	/^data = dataset.get_dataset().get_data_folds()[0]$/;"	v
+data	trainModel.py	/^data = dataset.get_dataset().get_data_folds()[0]$/;"	v
+data_ready	dataset.py	/^    def data_ready(self):$/;"	m	class:DataFold
+data_split_rank_and_invert	ranking.py	/^def data_split_rank_and_invert(scores, data_split):$/;"	f
+dataset	dataset.py	/^    dataset = get_dataset()$/;"	v
+dcg_at_k	evaluate.py	/^def dcg_at_k(sorted_labels, k):$/;"	f
+default_params	trainModel.py	/^default_params = {$/;"	v
+doc_feat	dataset.py	/^    def doc_feat(self, query_index, doc_index):$/;"	m	class:DataFoldSplit
+doc_str	dataset.py	/^    def doc_str(self, query_index, doc_index):$/;"	m	class:DataFoldSplit
+download_dataset	dataset.py	/^def download_dataset():$/;"	f
+e_i	example.py	/^s_i, e_i = data.train.query_range(qid)$/;"	v
+epochs	best_configs/Pointwise LTR model_best_config.json	/^ "epochs": 200,$/;"	n
+epochs	best_configs/RankNetFast_best_config.json	/^ "epochs": 50,$/;"	n
+epochs	best_configs/Ranknet-original_best_config.json	/^ "epochs": 200,$/;"	n
+epochs	trainModel.py	/^epochs = 100$/;"	v
+evaluate	evaluate.py	/^def evaluate(data_split, all_scores, print_results=False):$/;"	f
+evaluate_labels_scores	evaluate.py	/^def evaluate_labels_scores(labels, scores):$/;"	f
+evaluate_query	evaluate.py	/^def evaluate_query(data_split, qid, all_scores):$/;"	f
+evl	example.py	/^import evaluate as evl$/;"	I
+evl	trainModel.py	/^import evaluate as evl$/;"	I
+evl	train_functions.py	/^import evaluate as evl$/;"	I
+get_data_folds	dataset.py	/^    def get_data_folds(self):$/;"	m	class:DataSet
+get_dataset	dataset.py	/^def get_dataset(num_folds=1,$/;"	f
+included	evaluate.py	/^def included(qid, data_split):$/;"	f
+learning rate	best_configs/Pointwise LTR model_best_config.json	/^ "learning rate": 1e-06,$/;"	n
+learning rate	best_configs/RankNetFast_best_config.json	/^ "learning rate": 0.001,$/;"	n
+learning rate	best_configs/Ranknet-original_best_config.json	/^ "learning rate": 1e-06,$/;"	n
+listWiseModel	LTRmodels.py	/^class listWiseModel(LTRmodel):$/;"	c
+listWiseModel	LTRmodels2.py	/^class listWiseModel(LTRmodel):$/;"	c
+loss_function	LTRmodels.py	/^    def loss_function(self, target):$/;"	m	class:LTRmodel
+loss_function	LTRmodels.py	/^    def loss_function(self,target):$/;"	m	class:RankNetDefualt
+loss_function	LTRmodels.py	/^    def loss_function(self,target):$/;"	m	class:RankNetFast
+loss_function	LTRmodels2.py	/^    def loss_function(self, target):$/;"	m	class:LTRmodel
+loss_function	LTRmodels2.py	/^    def loss_function(self,target):$/;"	m	class:RankNetDefualt
+loss_function	LTRmodels2.py	/^    def loss_function(self,target):$/;"	m	class:listWiseModel
+ndcg_at_k	evaluate.py	/^def ndcg_at_k(sorted_labels, ideal_labels, k):$/;"	f
+nn	LTRmodels.py	/^import torch.nn as nn$/;"	I
+nn	LTRmodels2.py	/^import torch.nn as nn$/;"	I
+np	LTRmodels.py	/^import numpy as np$/;"	I
+np	LTRmodels2.py	/^import numpy as np$/;"	I
+np	dataset.py	/^import numpy as np$/;"	I
+np	evaluate.py	/^import numpy as np$/;"	I
+np	example.py	/^import numpy as np$/;"	I
+np	ranking.py	/^import numpy as np$/;"	I
+np	ranking_example.py	/^import numpy as np$/;"	I
+np	trainModel.py	/^import numpy as np$/;"	I
+np	train_functions.py	/^import numpy as np$/;"	I
+num features	best_configs/Pointwise LTR model_best_config.json	/^ "num features": 501,$/;"	n
+num features	best_configs/RankNetFast_best_config.json	/^ "num features": 501,$/;"	n
+num features	best_configs/Ranknet-original_best_config.json	/^ "num features": 501,$/;"	n
+num_docs	dataset.py	/^    def num_docs(self):$/;"	m	class:DataFoldSplit
+num_folds	dataset.py	/^    def num_folds(self):$/;"	m	class:DataSet
+num_queries	dataset.py	/^    def num_queries(self):$/;"	m	class:DataFoldSplit
+number of layers	best_configs/Pointwise LTR model_best_config.json	/^ "number of layers": 4,$/;"	n
+number of layers	best_configs/RankNetFast_best_config.json	/^ "number of layers": 1,$/;"	n
+number of layers	best_configs/Ranknet-original_best_config.json	/^ "number of layers": 4,$/;"	n
+number of neurons per layer	best_configs/Pointwise LTR model_best_config.json	/^ "number of neurons per layer": 100$/;"	n
+number of neurons per layer	best_configs/RankNetFast_best_config.json	/^ "number of neurons per layer": 5,$/;"	n
+number of neurons per layer	best_configs/Ranknet-original_best_config.json	/^ "number of neurons per layer": 100,$/;"	n
+number of random pairs	best_configs/RankNetFast_best_config.json	/^ "number of random pairs": 500$/;"	n
+number of random pairs	best_configs/Ranknet-original_best_config.json	/^ "number of random pairs": 5000$/;"	n
+paramSweep	train_functions.py	/^def paramSweep(modelClass, data, default_config, param_ranges):$/;"	f
+param_ranges	trainModel.py	/^param_ranges = {$/;"	v
+pointWiseModel	LTRmodels.py	/^class pointWiseModel(LTRmodel):$/;"	c
+pointWiseModel	LTRmodels2.py	/^class pointWiseModel(LTRmodel):$/;"	c
+qid	example.py	/^qid = 1$/;"	v
+query_feat	dataset.py	/^    def query_feat(self, query_index):$/;"	m	class:DataFoldSplit
+query_inverted_ranking	example.py	/^query_ranking, query_inverted_ranking = rnk.rank_and_invert(all_scores[s_i:e_i])$/;"	v
+query_labels	dataset.py	/^    def query_labels(self, query_index):$/;"	m	class:DataFoldSplit
+query_range	dataset.py	/^    def query_range(self, query_index):$/;"	m	class:DataFoldSplit
+query_ranking	example.py	/^query_ranking, query_inverted_ranking = rnk.rank_and_invert(all_scores[s_i:e_i])$/;"	v
+query_size	dataset.py	/^    def query_size(self, query_index):$/;"	m	class:DataFoldSplit
+query_sizes	dataset.py	/^    def query_sizes(self):$/;"	m	class:DataFoldSplit
+random_model	example.py	/^random_model = pointWiseModel(data.num_features, [10,10,10])$/;"	v
+rank	LTRmodels.py	/^    def rank(self, scores, docs):$/;"	m	class:LTRmodel
+rank	LTRmodels2.py	/^    def rank(self, scores, docs):$/;"	m	class:LTRmodel
+rank_and_invert	ranking.py	/^def rank_and_invert(scores):$/;"	f
+read_data	dataset.py	/^    def read_data(self):$/;"	m	class:DataFold
+results	example.py	/^results = evl.evaluate(data.validation, validation_scores, print_results=True)$/;"	v
+rnk	LTRmodels.py	/^import ranking as rnk$/;"	I
+rnk	LTRmodels2.py	/^import ranking as rnk$/;"	I
+rnk	example.py	/^import ranking as rnk$/;"	I
+rnk	ranking_example.py	/^import ranking as rnk$/;"	I
+rnk	trainModel.py	/^import ranking as rnk$/;"	I
+rnk	train_functions.py	/^import ranking as rnk$/;"	I
+s_i	example.py	/^s_i, e_i = data.train.query_range(qid)$/;"	v
+score	LTRmodels.py	/^    def score(self, docs):$/;"	m	class:LTRmodel
+score	LTRmodels2.py	/^    def score(self, docs):$/;"	m	class:LTRmodel
+scores	ranking_example.py	/^scores = np.array([10., 8., 12., 9., 5.])$/;"	v
+sigma	best_configs/RankNetFast_best_config.json	/^ "sigma": 0.5,$/;"	n
+sigma	best_configs/Ranknet-original_best_config.json	/^ "sigma": 2,$/;"	n
+split	dataset.py	/^        split = getattr(data, split)$/;"	v
+testModel	train_functions.py	/^def testModel(model, data):$/;"	f
+trainModel	train_functions.py	/^def trainModel(model, data, epochs, optimizer):$/;"	f
+validation_scores	example.py	/^validation_scores = random_model.score(data.validation)$/;"	v
