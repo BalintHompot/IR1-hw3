@@ -2,8 +2,9 @@ import ranking as rnk
 import evaluate as evl
 import numpy as np
 import torch
-from tqdm import tqdm
 import json
+from tqdm import tqdm
+import os
 DEVICE = "cpu"
 
 def trainModel(model, data, epochs, optimizer):
@@ -45,7 +46,7 @@ def construct_and_train_model_with_config(modelClass, data, config):
     epochs = config["epochs"]
     hidden_layers = [config["number of neurons per layer"] for i in range(config["number of layers"])]
     num_features = config["num features"]
-    
+
     model = modelClass(num_features, hidden_layers, sigma=1, random_pairs=500)
     if model.name != "Pointwise LTR model":
         model.sigma = config["sigma"]
@@ -57,8 +58,19 @@ def construct_and_train_model_with_config(modelClass, data, config):
     return trained_model
 
 def paramSweep(modelClass, data, default_config, param_ranges):
-    best_config = {"num features":data.num_features}
-    best_ndcg = -10000
+    '''
+    '''
+
+    #retrieve the previously optimised model config
+    save_file = "./best_configs/" + modelClass(1, [1], sigma=1, random_pairs=2).name + "_best_config.json"
+    if os.path.exists(save_file):
+        print(f"{save_file} already exists, retrieving")
+        with open(save_file, "r") as f:
+            best_config =  json.load(f)
+        return best_config
+
+    best_config = {"num features":data.num_features} #model config to be added to in below opt
+    best_ndcg = -10000 #default starting point mea
 
     learning_rates = param_ranges["learning rates"]
     epoch_nums = param_ranges["epoch nums"]
@@ -96,7 +108,7 @@ def paramSweep(modelClass, data, default_config, param_ranges):
             best_config["epochs"] = epochs
     print("............................")
     print("finished sweeping for epoch num, best value: " + str(best_config["epochs"]))
-    print("............................") 
+    print("............................")
 
     best_ndcg = -1000
 
