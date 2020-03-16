@@ -45,7 +45,7 @@ param_ranges = {
 ######################################################
 
 print("--------- Fitting models and testing on set-aside data ------------")
-for model in [pointWiseModel, RankNetDefualt]:
+for model in [listwise_ERR]:#[pointWiseModel, RankNetDefualt, RankNetFast, listwise_cDCG, listwise_ERR ]:
     # searching for best params
     best_params_for_model = paramSweep(model, data, default_params, param_ranges)
     # training model with best params
