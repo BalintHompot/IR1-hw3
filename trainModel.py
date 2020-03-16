@@ -3,6 +3,7 @@ import ranking as rnk
 import evaluate as evl
 import numpy as np
 import torch
+import json
 from tqdm import tqdm
 from LTRmodels import *
 from train_functions import *
@@ -53,6 +54,6 @@ for model in [listwise_ERR]:#[pointWiseModel, RankNetDefualt, RankNetFast, listw
     # testing the best model
     best_model_results = testModel(best_model, data)
     # saving best model and results
-    #TODO
+    save_model_and_res(best_model, best_model_results)
 
 

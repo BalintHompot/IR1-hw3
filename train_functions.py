@@ -3,6 +3,7 @@ import evaluate as evl
 import numpy as np
 import torch
 import json
+import pickle as pkl
 from tqdm import tqdm
 import os
 DEVICE = "cpu"
@@ -41,6 +42,15 @@ def testModel(model, data):
     print('Final performance of ' + model.name + ' with optimal params on test partition.')
     results = evl.evaluate(data.test, test_scores, print_results=True)
     return results
+
+def save_model_and_res(model, results):
+    with open("./best_model_results/"+model.name+"_best_config_results.json", "w+") as writer:
+        json.dump(results, writer, indent=1)
+
+    filehandler = open("./best_models/" + model.name + ".model", 'wb') 
+    pkl.dump(model, filehandler)
+    filehandler.close()
+    
 
 def construct_and_train_model_with_config(modelClass, data, config):
     epochs = config["epochs"]
