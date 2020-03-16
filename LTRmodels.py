@@ -168,7 +168,7 @@ class listWiseModel(LTRmodel):
         """
 
         #modify self.name to include the selected function
-        self.name += "_" + irm
+        # self.name += "_" + irm
 
         #evaluation methods as lambda functions
         DCG = lambda labels : sum([labels[i-1]/(np.log2(i+1)) for i in range(1,len(labels)+1)])
