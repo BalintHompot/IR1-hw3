@@ -132,4 +132,5 @@ class RankNetFast(RankNetDefualt):
         return loss
 
 class listWiseModel(LTRmodel):
+    pass
 
