@@ -239,7 +239,7 @@ class listwise_cDCG(listWiseModel):
         self.name = "LambdaRank_nDCG"
 
     def loss_function(self,target, irm = "nDCG"):
-        super().loss_function(target, irm)
+        return super().loss_function(target, irm)
 
 class listwise_ERR(listWiseModel):
     """
@@ -250,4 +250,4 @@ class listwise_ERR(listWiseModel):
         self.name = "LambdaRank_ERR"
 
     def loss_function(self,target, irm = "ERR"):
-        super().loss_function(target, irm)
+        return super().loss_function(target, irm)
