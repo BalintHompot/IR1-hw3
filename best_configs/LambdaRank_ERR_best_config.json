@@ -1,0 +1,9 @@
+{
+ "num features": 501,
+ "learning rate": 0.0001,
+ "epochs": 200,
+ "number of layers": 4,
+ "number of neurons per layer": 50,
+ "sigma": 0.5,
+ "number of random pairs": 1000
+}
