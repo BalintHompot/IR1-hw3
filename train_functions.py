@@ -62,12 +62,12 @@ def trainModel(model, data, epochs, optimizer, plotting = False):
     return model, results["ndcg"]
 
 def savePlot(dataSeries, modelName):
-    f, a = plt.subplots(1, len(dataSeries))
+    f, a = plt.subplots(1, len(dataSeries), squeeze = False)
     for seriesInd, series in enumerate(dataSeries):
-        a[seriesInd].plot(series["ticks"], series["values"])
-        a[seriesInd].set_title(series["seriesName"])
-        a[seriesInd].set_xlabel('epoch')
-        a[seriesInd].set_ylabel('value')
+        a[0][seriesInd].plot(series["ticks"], series["values"])
+        a[0][seriesInd].set_title(series["seriesName"])
+        a[0][seriesInd].set_xlabel('epoch')
+        a[0][seriesInd].set_ylabel('value')
     plt.savefig("./plots/" + modelName + "_training.png")
 
 
