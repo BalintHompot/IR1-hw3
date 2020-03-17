@@ -5,14 +5,21 @@ import torch
 import json
 import pickle as pkl
 from tqdm import tqdm
+from matplotlib import pyplot as plt
 import os
 DEVICE = "cpu"
 
-def trainModel(model, data, epochs, optimizer):
+def trainModel(model, data, epochs, optimizer, plotting = False):
     print("======================== " + model.name + "========================")
 
     labels = torch.Tensor(data.train.label_vector).to(DEVICE).unsqueeze(1)
     labels_val = torch.Tensor(data.validation.label_vector).to(DEVICE).unsqueeze(1)
+
+    ###for plotting
+    if plotting:
+        losses = {"ticks":[], "values":[], "seriesName": "train loss"}
+        ndcgs = {"ticks":[], "values":[], "seriesName": "validation nDCG"}
+        arrs = {"ticks":[], "values":[], "seriesName": "validation ARR"}
 
     for epoch in tqdm(range(epochs)):
         model.train()
@@ -21,11 +28,20 @@ def trainModel(model, data, epochs, optimizer):
         loss = model.loss_function(labels)
         loss.backward()
         optimizer.step()
-        if epoch%20 == 0:
+        if plotting:
+            losses["ticks"].append(epoch)
+            losses["values"].append(loss.item())
+        if epoch%10 == 0:
             print("validation ndcg at epoch " + str(epoch))
             model.eval()
             validation_scores = model.score(data.validation)
             results = evl.evaluate(data.validation, validation_scores, print_results=False)
+            if plotting:
+                ndcgs["values"].append(results["ndcg"][0])
+                ndcgs["ticks"].append(epoch)
+                arrs["values"].append(results["relevant rank"][0])
+                arrs["ticks"].append(epoch)
+
             print(results["ndcg"])
 
     ### testing on test set and returning ndcg for it
@@ -34,7 +50,26 @@ def trainModel(model, data, epochs, optimizer):
     print('Evaluation of ' + model.name + ' on validation partition.')
     results = evl.evaluate(data.validation, validation_scores, print_results=False)
     print(results["ndcg"])
+
+    if plotting:
+        if model.name == "Pointwise LTR model":
+            savePlot([losses, ndcgs], model.name)
+        elif model.name == "RankNetFast":
+            savePlot([ndcgs, arrs], model.name)
+        elif model.name == "LambdaRank_nDCG" or model.name == "LambdaRank_ERR":
+            savePlot([ndcgs], model.name)
+    
     return model, results["ndcg"]
+
+def savePlot(dataSeries, modelName):
+    f, a = plt.subplots(1, len(dataSeries))
+    for seriesInd, series in enumerate(dataSeries):
+        a[seriesInd].plot(series["ticks"], series["values"])
+        a[seriesInd].set_title(series["seriesName"])
+        a[seriesInd].set_xlabel('epoch')
+        a[seriesInd].set_ylabel('value')
+    plt.savefig("./plots/" + modelName + "_training.png")
+
 
 def testModel(model, data):
     test_scores = model.score(data.test)
@@ -64,7 +99,7 @@ def construct_and_train_model_with_config(modelClass, data, config):
     optimizer = torch.optim.Adam(model.parameters(), lr = config["learning rate"])
     print("++++++++++++++++++++++++++ Training model " + model.name + " with best params +++++++++++++++++++++++++++++++")
 
-    trained_model, train_results = trainModel(model, data, epochs, optimizer)
+    trained_model, train_results = trainModel(model, data, epochs, optimizer, plotting = True)
     return trained_model
 
 def paramSweep(modelClass, data, default_config, param_ranges):
