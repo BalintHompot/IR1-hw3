@@ -61,7 +61,7 @@ for s in [set1, set2, set3, set4, set5]:
         label='validation')
 
         plt.xlabel('score')
-        plt.ylabel('mean')
+        plt.ylabel(stat)
         plt.title('comparison of test and validation scores')
         plt.xticks(index + bar_width, labels[0])
         plt.legend()

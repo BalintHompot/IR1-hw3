@@ -19,6 +19,9 @@ with open("./best_models/Pointwise LTR model.model", "rb") as f:
 
 scores = model.score(data.validation)
 results_validation = ev.evaluate(data.validation, scores)
+print(data.validation)
+print("\n\n")
+print(scores)
 
 #save results
 with open("AQ2.2_validation.json", "w") as f:
