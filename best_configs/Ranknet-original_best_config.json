@@ -5,5 +5,5 @@
  "number of layers": 1,
  "number of neurons per layer": 100,
  "sigma": 0.5,
- "number of random pairs": 500
+ "number of random pairs": 5000
 }

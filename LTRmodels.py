@@ -47,17 +47,16 @@ class pointWiseModel(LTRmodel):
         self.name = "Pointwise LTR model"
         self.loss_fn = torch.nn.SmoothL1Loss()
 
-class RankNetDefualt(LTRmodel):
+class RankNetDefault(LTRmodel):
     def __init__(self, num_features, scoring_network_layers, dropout = 0.3, sigma = 1, random_pairs = 500):
         super().__init__(num_features, scoring_network_layers, dropout)
         self.name = "Ranknet-original"
-        self.loss_fn = torch.nn.BCELoss()
         self.sigma = sigma
         self.random_pairs = random_pairs
 
-    def calc_p(self,s_i, s_j):
-        return 1/(1 + torch.exp(-self.sigma * (s_i - s_j)))
 
+    def calc_C(self,s_i, s_j, S_ij):
+        return 0.5 * (1 - S_ij) * self.sigma * (s_i - s_j) + torch.log(1 + torch.exp(-self.sigma * (s_i - s_j)))
     #override
     def loss_function(self,target):
         target = target.squeeze()
@@ -75,9 +74,7 @@ class RankNetDefualt(LTRmodel):
             else:
                 S = -1
 
-            S = torch.Tensor([S])
-            P = self.calc_p(s_i, s_j)
-            loss += self.loss_fn(P, S)
+            loss += self.calc_C(s_i, s_j, S)
 
         return loss
 
