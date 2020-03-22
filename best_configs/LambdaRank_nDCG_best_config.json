@@ -1,7 +1,7 @@
 {
  "num features": 501,
  "learning rate": 0.001,
- "epochs": 50,
+ "epochs": 250,
  "number of layers": 2,
  "number of neurons per layer": 10,
  "sigma": 0.5,
