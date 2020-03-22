@@ -46,6 +46,8 @@ def trainModel(model, data, epochs, optimizer, plotting = False):
 
     ### testing on test set and returning ndcg for it
     validation_scores = model.score(data.validation)
+    print("valid scores")
+    print(validation_scores)
     print('------')
     print('Evaluation of ' + model.name + ' on validation partition.')
     results = evl.evaluate(data.validation, validation_scores, print_results=False)
@@ -58,7 +60,11 @@ def trainModel(model, data, epochs, optimizer, plotting = False):
             savePlot([ndcgs, arrs], model.name)
         elif model.name == "LambdaRank_nDCG" or model.name == "LambdaRank_ERR":
             savePlot([ndcgs], model.name)
-    
+
+        ### plotting final validation scores against ground truth
+        saveScoreDistrPlot(validation_scores, data.validation.label_vector, model.name + "_validation_score_distr")
+
+
     return model, results["ndcg"]
 
 def savePlot(dataSeries, modelName):
@@ -70,12 +76,26 @@ def savePlot(dataSeries, modelName):
         a[0][seriesInd].set_ylabel('value')
     plt.savefig("./plots/" + modelName + "_training.png")
 
+def saveScoreDistrPlot(scores, labels, name):
+    f, a = plt.subplots(1,2, squeeze = False)
+    a[0][0].hist(scores, bins = 5)
+    a[0][0].set_title("Labels")
+    a[0][0].set_xlabel("label")
+    a[0][0].set_ylabel("count")
+    a[0][1].hist( labels , bins = 5)
+    a[0][1].set_title("Scores")
+    a[0][1].set_xlabel("score")
+    
+    plt.savefig("./plots/" + name + ".png")
 
-def testModel(model, data):
+
+def testModel(model, data, scorePlotting = True):
     test_scores = model.score(data.test)
     print('+++++++++++++++++++++++++++++++++++++++++++++')
     print('Final performance of ' + model.name + ' with optimal params on test partition.')
     results = evl.evaluate(data.test, test_scores, print_results=True)
+    if scorePlotting:
+        saveScoreDistrPlot(test_scores, data.test.label_vector, model.name + "_test_score_distr")
     return results
 
 def save_model_and_res(model, results):
@@ -88,6 +108,7 @@ def save_model_and_res(model, results):
     
 
 def construct_and_train_model_with_config(modelClass, data, config):
+
     epochs = config["epochs"]
     hidden_layers = [config["number of neurons per layer"] for i in range(config["number of layers"])]
     num_features = config["num features"]
