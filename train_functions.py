@@ -10,6 +10,7 @@ import os
 DEVICE = "cpu"
 
 def trainModel(model, data, epochs, optimizer, plotting = False):
+
     print("======================== " + model.name + "========================")
 
     labels = torch.Tensor(data.train.label_vector).to(DEVICE).unsqueeze(1)
@@ -78,11 +79,11 @@ def savePlot(dataSeries, modelName):
 
 def saveScoreDistrPlot(scores, labels, name):
     f, a = plt.subplots(1,2, squeeze = False)
-    a[0][0].hist(scores, bins = 5)
+    a[0][0].hist(labels, bins = [0,1,2,3,4])
     a[0][0].set_title("Labels")
     a[0][0].set_xlabel("label")
     a[0][0].set_ylabel("count")
-    a[0][1].hist( labels , bins = 5)
+    a[0][1].hist( scores , bins = [0,1,2,3,4])
     a[0][1].set_title("Scores")
     a[0][1].set_xlabel("score")
     
